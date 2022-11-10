@@ -1,13 +1,35 @@
 import 'package:flutter/material.dart';
+import 'form.dart';
+import 'data_budget.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class Budget {
+  final String judul;
+  final int nominal;
+  final String tipeBudget;
+  Budget(this.judul, this.nominal, this.tipeBudget);
+}
+
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
+  final List<Budget> data = <Budget>[];
+
+  void addData(Budget newBudget) {
+    setState(() {
+      data.add(newBudget);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -24,13 +46,16 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Program Counter'),
+      home: MyHomePage(
+        data: data,
+        addData: addData,
+      ),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  const MyHomePage({super.key, required this.data, required this.addData});
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -41,7 +66,9 @@ class MyHomePage extends StatefulWidget {
   // used by the build method of the State. Fields in a Widget subclass are
   // always marked "final".
 
-  final String title;
+  final String title = "Counter";
+  final List<Budget> data;
+  final Function(Budget) addData;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -101,6 +128,42 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
+      // Menambahkan drawer menu
+      drawer: Drawer(
+        child: Column(
+          children: [
+            // Menambahkan clickable menu
+            ListTile(
+              title: const Text('Tambah Budget'),
+              onTap: () {
+                // Route menu ke halaman utama
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => MyFormPage(
+                            data: widget.data,
+                            addData: widget.addData,
+                          )),
+                );
+              },
+            ),
+            ListTile(
+              title: const Text('Data Budget'),
+              onTap: () {
+                // Route menu ke halaman form
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => DisplayData(
+                            data: widget.data,
+                            addData: widget.addData,
+                          )),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
@@ -129,27 +192,31 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      floatingActionButton: Stack(children: [
-        Align(
-          alignment: Alignment.bottomRight,
-          child: FloatingActionButton(
-            onPressed: _incrementCounter,
-            tooltip: 'Increment',
-            child: const Icon(Icons.add),
-          ),
-        ),
-        Align(
-          alignment: Alignment.bottomLeft,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30),
+      floatingActionButton: Stack(
+        children: [
+          Align(
+            alignment: Alignment.bottomRight,
             child: FloatingActionButton(
-              onPressed: _decrementCounter,
-              tooltip: 'Decrement',
-              child: const Text("-"),
+              heroTag: "btn1",
+              onPressed: _incrementCounter,
+              tooltip: 'Increment',
+              child: const Icon(Icons.add),
             ),
           ),
-        ),
-      ]),
+          Align(
+            alignment: Alignment.bottomLeft,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: FloatingActionButton(
+                heroTag: "btn2",
+                onPressed: _decrementCounter,
+                tooltip: 'Decrement',
+                child: const Text("-"),
+              ),
+            ),
+          ),
+        ],
+      ),
       // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
