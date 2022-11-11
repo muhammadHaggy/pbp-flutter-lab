@@ -21,9 +21,6 @@ class _MyFormPageState extends State<MyFormPage> {
   List<String> budget = ['Pemasukan', 'Pengeluaran'];
 
   bool isNumeric(String s) {
-    if (s == null) {
-      return false;
-    }
     return double.tryParse(s) != null;
   }
 
@@ -31,7 +28,7 @@ class _MyFormPageState extends State<MyFormPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Form Budget'),
+        title: const Text('Form Budget'),
       ),
       // Menambahkan drawer menu
       drawer: Drawer(
@@ -84,7 +81,7 @@ class _MyFormPageState extends State<MyFormPage> {
                       Column(
                         children: [
                           Padding(
-                            padding: EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(8.0),
                             child: TextFormField(
                               decoration: InputDecoration(
                                   hintText: "Judul",
@@ -112,7 +109,7 @@ class _MyFormPageState extends State<MyFormPage> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(8.0),
                             child: TextFormField(
                               keyboardType: TextInputType.number,
                               inputFormatters: <TextInputFormatter>[
@@ -166,10 +163,6 @@ class _MyFormPageState extends State<MyFormPage> {
                         ],
                       ),
                       TextButton(
-                          child: const Text(
-                            "Simpan",
-                            style: TextStyle(color: Colors.white),
-                          ),
                           style: ButtonStyle(
                             backgroundColor:
                                 MaterialStateProperty.all(Colors.blue),
@@ -179,7 +172,11 @@ class _MyFormPageState extends State<MyFormPage> {
                               widget.addData(
                                   Budget(judul, nominal, jenisBudget!));
                             }
-                          }),
+                          },
+                          child: const Text(
+                            "Simpan",
+                            style: TextStyle(color: Colors.white),
+                          )),
                     ],
                   ),
                 ),

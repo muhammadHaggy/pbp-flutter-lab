@@ -101,7 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  Widget odd_even_counter() {
+  Widget oddEvenCounter() {
     if (_counter % 2 == 0) {
       return Text(
         "GENAP",
@@ -184,7 +184,7 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            odd_even_counter(),
+            oddEvenCounter(),
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headline4,

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'main.dart';
 import 'form.dart';
 
@@ -17,7 +15,7 @@ class _DisplayDataState extends State<DisplayData> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Data Budget'),
+        title: const Text('Data Budget'),
       ),
       // Menambahkan drawer menu
       drawer: Drawer(
@@ -67,7 +65,7 @@ class _DisplayDataState extends State<DisplayData> {
                 child: Container(
                   decoration: BoxDecoration(
                       border: Border.all(),
-                      borderRadius: BorderRadius.all(Radius.circular(5))),
+                      borderRadius: const BorderRadius.all(Radius.circular(5))),
                   child: ListTile(
                     tileColor: Colors.white,
                     title: Text(
