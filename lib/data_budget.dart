@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'main.dart';
 import 'form.dart';
+import 'my_drawer.dart';
 
 class DisplayData extends StatefulWidget {
   const DisplayData({super.key, required this.data, required this.addData});
@@ -18,42 +19,9 @@ class _DisplayDataState extends State<DisplayData> {
         title: const Text('Data Budget'),
       ),
       // Menambahkan drawer menu
-      drawer: Drawer(
-        child: Column(
-          children: [
-            // Menambahkan clickable menu
-            ListTile(
-              title: const Text('Tambah Budget'),
-              onTap: () {
-                // Route menu ke halaman utama
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => MyFormPage(
-                      data: widget.data,
-                      addData: widget.addData,
-                    ),
-                  ),
-                );
-              },
-            ),
-            ListTile(
-              title: const Text('Data Budget'),
-              onTap: () {
-                // Route menu ke halaman form
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => DisplayData(
-                      data: widget.data,
-                      addData: widget.addData,
-                    ),
-                  ),
-                );
-              },
-            ),
-          ],
-        ),
+      drawer: MyDrawer(
+        data: widget.data,
+        addData: widget.addData,
       ),
       body: Container(
         padding: const EdgeInsets.all(20.0),
