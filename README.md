@@ -43,3 +43,24 @@ Membuat drawer yang berisi navigasi ke halaman form dan budget.<br>
 Menambahkan halaman baru pada form.dart dengan form yang berisi judul, nominal, dan jenis budget yang disusun vertikal.<br>
 Menambahkan sebuah halaman untuk menampilkan data budget. Data budget ditampilkan dalam listview secara vertikal.<br>
 Membuat sebuah class Budget sebagai model penyimpanan data.
+
+# Tugas 9
+
+## Apakah bisa kita melakukan pengambilan data JSON tanpa membuat model terlebih dahulu? Jika iya, apakah hal tersebut lebih baik daripada membuat model sebelum melakukan pengambilan data JSON?
+
+Ya, bisa. Namun, ada beberapa kerugian yaitu dalam hal type safety dan struktur yang berantakan, serta kemungkinan error yang lebih tinggi.
+
+## Jelaskan mekanisme pengambilan data dari json hingga dapat ditampilkan pada Flutter.
+1. data difetch dari API endpoint dalam bentuk json
+2. data json di konversi menjadi instance dari model
+
+## Sebutkan widget apa saja yang kamu pakai di proyek kali ini dan jelaskan fungsinya.
+1. Textbutton adalah button sebagai tombol back.
+2. Center widget untuk menampilkan widget dengan alignment center
+3. Column widget untuk menyusul children dalam baris-baris horizontal
+
+## Implementasi
+1. Membuat tombol navigasi baru pada Drawer untuk mengakses page watchlist_detail.
+2. Membuat sebuah model WatchList dengan fields sesuai dengan fields object WatchList pada Tugas 3.
+3. Membuat page my_watchlist untuk menampilkan judul-judul WatchList yang diperoleh melalui API endpoint dari Tugas 3. Judul-judul tersebut ditampilkan secara vertikal dan dapat diklik untuk mengakses page watchlist_detail
+4. Membuat page watchlist_detail yang dapat diakses dengan mengklik sebuah WatchList pada page my_watchlist. Pada page ini terdapat detail dari object WatchList yang diperoleh dari argumen navigasi dan tombol back untuk kembali ke page my_watchlist
